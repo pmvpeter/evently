@@ -9,14 +9,25 @@ const adapter = new PrismaPg({ connectionString: process.env.POSTGRES_URL_NON_PO
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
-  const hashedPassword = await bcrypt.hash("events2026Demo", 10)
+  const hashedPassword = await bcrypt.hash("evently2026Demo", 10)
 
   await prisma.user.upsert({
     where: { email: "pedro.melo.vasconcelos@gmail.com" },
-    update: {},
+    update: { password: hashedPassword },
     create: {
       email: "pedro.melo.vasconcelos@gmail.com",
       name: "Pedro Vasconcelos",
+      password: hashedPassword,
+      role: "admin",
+    },
+  })
+
+  await prisma.user.upsert({
+    where: { email: "eliott@pmvpeter.com" },
+    update: { password: hashedPassword },
+    create: {
+      email: "eliott@pmvpeter.com",
+      name: "Eliott Ardisson",
       password: hashedPassword,
       role: "admin",
     },
