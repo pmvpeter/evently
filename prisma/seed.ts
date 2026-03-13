@@ -1,12 +1,10 @@
 import { config } from "dotenv"
 import { PrismaClient } from "../generated/prisma/client"
-import { PrismaPg } from "@prisma/adapter-pg"
 import bcrypt from "bcryptjs"
 
 config({ path: ".env.local" })
 
-const adapter = new PrismaPg({ connectionString: process.env.POSTGRES_URL_NON_POOLING! })
-const prisma = new PrismaClient({ adapter })
+const prisma = new PrismaClient()
 
 async function main() {
   const hashedPassword = await bcrypt.hash("evently2026Demo", 10)
