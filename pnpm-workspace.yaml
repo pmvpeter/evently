@@ -1,0 +1,18 @@
+allowBuilds:
+  /: true
+  '@': true
+  '@prisma/engines': true
+  a: true
+  e: true
+  esbuild: true
+  g: true
+  i: true
+  m: true
+  msw: true
+  n: true
+  p: true
+  prisma: true
+  r: true
+  s: true
+  sharp: true
+  unrs-resolver: true
