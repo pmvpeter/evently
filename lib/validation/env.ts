@@ -1,7 +1,8 @@
 import { z } from "zod/v4"
 
 const envSchema = z.object({
-  DATABASE_URL: z.string(),
+  POSTGRES_PRISMA_URL: z.string(),
+  POSTGRES_URL_NON_POOLING: z.string(),
   AUTH_SECRET: z.string(),
   OPENAI_API_KEY: z.string(),
 })

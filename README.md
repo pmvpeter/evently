@@ -59,7 +59,8 @@ cp .env.example .env.local
 
 | Variable       | Description                              |
 |----------------|------------------------------------------|
-| `DATABASE_URL` | PostgreSQL connection string             |
+| `POSTGRES_PRISMA_URL` | PostgreSQL connection string (pooled, for runtime) |
+| `POSTGRES_URL_NON_POOLING` | PostgreSQL connection string (direct, for migrations/seeds) |
 | `AUTH_SECRET`   | Auth.js secret (generate with `openssl rand -base64 32`) |
 
 ### Database Setup

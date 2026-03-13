@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs"
 
 config({ path: ".env.local" })
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL! })
+const adapter = new PrismaPg({ connectionString: process.env.POSTGRES_URL_NON_POOLING! })
 const prisma = new PrismaClient({ adapter })
 
 async function main() {
