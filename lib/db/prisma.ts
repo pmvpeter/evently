@@ -5,8 +5,12 @@ const globalForPrisma = globalThis as unknown as {
   prisma?: PrismaClient
 }
 
+const connectionString = process.env.POSTGRES_PRISMA_URL!
+const isLocalhost = connectionString.includes("localhost") || connectionString.includes("127.0.0.1")
+
 const adapter = new PrismaPg({
-  connectionString: process.env.POSTGRES_PRISMA_URL!,
+  connectionString,
+  ssl: isLocalhost ? false : { rejectUnauthorized: false },
 })
 
 export const prisma =

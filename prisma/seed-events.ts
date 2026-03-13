@@ -1,8 +1,10 @@
 import dotenv from "dotenv"
 dotenv.config({ path: ".env.local" })
 import { PrismaClient, EventStatus } from "../generated/prisma/client"
+import { PrismaPg } from "@prisma/adapter-pg"
 
-const prisma = new PrismaClient()
+const adapter = new PrismaPg({ connectionString: process.env.POSTGRES_URL_NON_POOLING! })
+const prisma = new PrismaClient({ adapter })
 
 // Helper to create dates easily
 function d(year: number, month: number, day: number): Date {
