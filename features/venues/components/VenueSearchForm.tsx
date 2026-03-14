@@ -12,6 +12,9 @@ import { countries } from "../data/countries"
 import { searchVenues } from "../actions/searchVenues"
 import { VenueCard } from "./VenueCard"
 
+/** Estimated search duration in seconds – used to pace the simulated progress bar. */
+const ESTIMATED_SEARCH_SECONDS = 30
+
 const progressSteps = [
   { at: 0, text: "Analyzing your search criteria..." },
   { at: 15, text: "Finding venues that match your requirements..." },
@@ -43,13 +46,13 @@ function useSimulatedProgress(active: boolean) {
         const seconds = elapsed / 1000
 
         let value: number
-        if (seconds <= 15) {
-          // 0-90% over 15 seconds (ease-out)
-          value = 90 * (1 - Math.pow(1 - seconds / 15, 2))
+        if (seconds <= ESTIMATED_SEARCH_SECONDS) {
+          // 0-90% over estimated duration (ease-out)
+          value = 90 * (1 - Math.pow(1 - seconds / ESTIMATED_SEARCH_SECONDS, 2))
         } else {
-          // 90-99% asymptotically after 15s
-          const extra = seconds - 15
-          value = 90 + 9 * (1 - Math.exp(-extra / 15))
+          // 90-99% asymptotically after estimated duration
+          const extra = seconds - ESTIMATED_SEARCH_SECONDS
+          value = 90 + 9 * (1 - Math.exp(-extra / ESTIMATED_SEARCH_SECONDS))
         }
 
         setProgress(Math.min(value, 99))
